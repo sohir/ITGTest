@@ -42,6 +42,7 @@ class CharactersListFragment : Fragment(),
     fun observeCharctersList() {
         viewModel.responseModel.observe(viewLifecycleOwner, Observer {
             it?.let {
+                mAdapter.updateDate(it.data.results)
                 Log.v("list", "its code from the fragment : ${it.code.toString()}")
             }
         })
