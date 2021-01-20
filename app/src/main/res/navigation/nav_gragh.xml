@@ -23,5 +23,19 @@
         <action
             android:id="@+id/action_characterDetailsFragment_to_charactersListFragment"
             app:destination="@id/charactersListFragment" />
+        <argument
+            android:name="name"
+            app:argType="string"
+            />
+        <argument
+            android:name="description"
+            app:argType="string" />
+        <argument
+            android:name="img"
+            app:argType="string" />
+        <argument
+            android:name="charID"
+            app:argType="integer"
+             />
     </fragment>
 </navigation>

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.itg.itgmarvel.databinding.FragmentCharactersListBinding
 import com.itg.itgmarvel.models.CharactersListResponseModel
@@ -29,8 +30,10 @@ class CharactersListFragment : Fragment(),
         _binding = FragmentCharactersListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        mAdapter = CharactersListAdapter(this)
         setHasOptionsMenu(true)
+
+        mAdapter = CharactersListAdapter(this)
+
         binding.recycler.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(context)
@@ -49,7 +52,8 @@ class CharactersListFragment : Fragment(),
     }
 
     override fun onItemClicked(v: View, item: CharactersListResponseModel.Data.Result) {
-        Log.v("list", "clicked item is : ${item.name}")
+        Log.v("list", "clicked item is : ${item.description}")
+        findNavController().navigate(CharactersListFragmentDirections.actionCharactersListFragmentToCharacterDetailsFragment(item.name,item.description,"${item.thumbnail.path}.${item.thumbnail.extension}",item.id))
     }
 
     override fun onDestroyView() {
