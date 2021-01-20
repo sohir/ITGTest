@@ -2,4 +2,7 @@
     <string name="app_name">ITGMarvel</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_data">No data founded</string>
+    <string name="no_connection">No network available, please check your connection</string>
+    <string name="error_happens">Something error happened</string>
 </resources>

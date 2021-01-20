@@ -5,6 +5,8 @@
 
     <data>
         <import type="android.view.View"/>
+        <import type="com.itg.itgmarvel.network.LoadingState"/>
+
         <variable
             name="viewModel"
             type="com.itg.itgmarvel.characterslist.CharactersListViewModel" />
@@ -44,7 +46,61 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:listitem="@layout/characters_list_item"/>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/error"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="@{viewModel.errorMessage.empty? View.GONE : View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
+                <TextView
+                    android:id="@+id/showError"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="5sp"
+                    android:text="@{viewModel.errorMessage}"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="We will add new product soon" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <FrameLayout
+                android:id="@+id/loader"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black_opacity"
+                android:visibility="@{(viewModel.loadingState.Status==LoadingState.Status.RUNNING) ?View.VISIBLE:View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ProgressBar
+                    android:layout_gravity="center"
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
