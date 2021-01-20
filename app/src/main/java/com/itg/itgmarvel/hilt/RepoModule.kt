@@ -1,5 +1,6 @@
 package com.itg.itgmarvel.hilt
 
+import com.itg.itgmarvel.characterdetails.CharacterDetailsRepo
 import com.itg.itgmarvel.characterslist.CharactersListRepo
 import com.itg.itgmarvel.network.ApiServices
 import dagger.Module
@@ -15,5 +16,11 @@ object RepoModule {
     @ActivityRetainedScoped
     fun provideUserCharactersListRepo(apis: ApiServices):CharactersListRepo{
         return CharactersListRepo(apis)
+    }
+
+    @Provides
+    @ActivityRetainedScoped
+    fun provideCharacterDetailsRepo(apis: ApiServices):CharacterDetailsRepo{
+        return CharacterDetailsRepo(apis)
     }
 }

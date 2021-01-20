@@ -5,4 +5,7 @@
     <string name="no_data">No data founded</string>
     <string name="no_connection">No network available, please check your connection</string>
     <string name="error_happens">Something error happened</string>
+    <string name="name">NAME</string>
+    <string name="description">DESCRIPTION</string>
+    <string name="comics">COMICS</string>
 </resources>
