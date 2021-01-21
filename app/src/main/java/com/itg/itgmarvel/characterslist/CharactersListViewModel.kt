@@ -21,6 +21,9 @@ class CharactersListViewModel @ViewModelInject constructor(
     val job = SupervisorJob()
     val _viewModelScope = CoroutineScope(job + Dispatchers.Main)
     var responseModel = repo.responseModel
+    var charactersListModel = repo.charactersListModel
+    val _dbcount: LiveData<Int> = repo.dbCount
+
 
     private val _loadingState = MutableLiveData<LoadingState>()
     val loadingState: LiveData<LoadingState> = _loadingState
@@ -34,7 +37,16 @@ class CharactersListViewModel @ViewModelInject constructor(
 
         _viewModelScope.launch {
             try {
-                repo.charactersListRequest()
+                repo.getCharactersCount()
+                if (_dbcount.value==0){
+                    repo.charactersListRequestServer("2")
+                    Log.v("list"," FROM SERVER")
+
+                }else{
+                    repo.charactersListRequestDB()
+                    Log.v("list"," FROM db")
+
+                }
                 _loadingState.value=(LoadingState.LOADED)
                 if (responseModel.value?.data?.count==0){
                     _loadingState.value=(LoadingState.error(null))

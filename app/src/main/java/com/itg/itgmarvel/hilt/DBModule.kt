@@ -10,22 +10,23 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import javax.inject.Singleton
 
-@InstallIn(ActivityRetainedComponent::class)
+@InstallIn(ApplicationComponent::class)
 @Module
-object RepoModule {
-    @Provides
-    @ActivityRetainedScoped
-    fun provideUserCharactersListRepo(apis: ApiServices,db: MarvelDB,helper:HelperClass):CharactersListRepo{
-        return CharactersListRepo(apis,db,helper )
-    }
+object DBModule {
 
+    //DB Module
     @Provides
-    @ActivityRetainedScoped
-    fun provideCharacterDetailsRepo(apis: ApiServices):CharacterDetailsRepo{
-        return CharacterDetailsRepo(apis)
+    @Singleton
+    fun DataBaseRoom(application: Application): MarvelDB {
+        return MarvelDB(application)
     }
-
+    @Provides
+    @Singleton
+    fun HelperUtility():HelperClass{
+        return HelperClass()
+    }
 }

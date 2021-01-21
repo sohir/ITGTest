@@ -1,6 +1,8 @@
 package com.itg.itgmarvel.models
 
 
+import androidx.room.*
+import com.itg.itgmarvel.db.DBConverters
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -21,6 +23,7 @@ data class CharactersListResponseModel(
     @Json(name = "status")
     val status: String = ""
 ) {
+
     @JsonClass(generateAdapter = true)
     data class Data(
         @Json(name = "count")
@@ -34,28 +37,37 @@ data class CharactersListResponseModel(
         @Json(name = "total")
         val total: Int = 0
     ) {
+        @Entity(tableName = "characters")
         @JsonClass(generateAdapter = true)
         data class Result(
+            @Ignore
             @Json(name = "comics")
             val comics: Comics = Comics(),
             @Json(name = "description")
-            val description: String = "",
+            var description: String = "",
+            @Ignore
             @Json(name = "events")
             val events: Events = Events(),
+            @PrimaryKey
             @Json(name = "id")
-            val id: Int = 0,
+            var id: Int = 0,
+            @Ignore
             @Json(name = "modified")
             val modified: String = "",
             @Json(name = "name")
-            val name: String = "",
+            var name: String = "",
+            @Ignore
             @Json(name = "resourceURI")
             val resourceURI: String = "",
             @Json(name = "series")
+            @Ignore
             val series: Series = Series(),
             @Json(name = "stories")
+            @Ignore
             val stories: Stories = Stories(),
             @Json(name = "thumbnail")
-            val thumbnail: Thumbnail = Thumbnail(),
+            @Embedded var thumbnail: Thumbnail = Thumbnail(),
+            @Ignore
             @Json(name = "urls")
             val urls: List<Url> = listOf()
         ) {

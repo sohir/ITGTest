@@ -1,6 +1,7 @@
 package com.itg.itgmarvel.models
 
 
+import androidx.room.Entity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
